@@ -28,16 +28,26 @@ typedef struct port_info {
 /* 打开/关闭串口 */
 int open_port( char *port );
 void close_port( int fd );
-
-/* 根据波特率获得相应的波特率设置参数 */
-int get_baud_rate( unsigned long int baud_rate );
+//end
 
 /* 设置端口 */
 int set_port( pport_info p_info );
+/* 根据波特率获得相应的波特率设置参数 */
+int get_baud_rate( unsigned long int baud_rate );
+/*============设置数据流控制=======*/
+int set_flow_ctrl( pport_info p_info, struct termios *opt );
+/*============设置数据位=========*/
+int set_data_bit( pport_info p_info, struct termios *opt );
+/*============设置奇偶校验位========*/
+int set_parity( pport_info p_info, struct termios *opt );
+/*============设置停止位========*/
+int set_stop_bit( pport_info p_info, struct termios *opt );
+//end set_port
 
 /* 使用串口发送/接收数据 */
 int send_data( int fd, char *data, int data_len );
 int recv_data( int fd, char *data, int data_len );
+//end
 
 #endif
 

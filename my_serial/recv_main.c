@@ -10,7 +10,7 @@ main( int argc, char *argv[] )
 	int i;
 	int len;
 	int port_fd;
-	char recv_buf[9];
+	char recv_buf[MAX_BUF_LEN];
 	struct port_info info;
 
 	if ( argc != 2 ) {
@@ -40,7 +40,7 @@ main( int argc, char *argv[] )
 
 	/* 接受数据 */
 	while (1) {
-		len = recv_data( port_fd, recv_buf, 9 );
+		len = recv_data( port_fd, recv_buf, MAX_BUF_LEN );
 		if ( len > 0 ) {
 			for ( i = 0; i < len; i++ ) {
 				fprintf( stdout, "recv data is: %s\n", recv_buf );

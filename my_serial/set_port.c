@@ -3,6 +3,8 @@
  */
 
 #include "my_serial.h"
+//#include <sys/stat.h>
+//#include <sys/types.h>
 
 /* 设置端口 */
 int set_port( pport_info p_info )

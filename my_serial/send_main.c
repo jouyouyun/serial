@@ -10,7 +10,7 @@ main( int argc, char *argv[] )
 	int i;
 	int len;
 	int port_fd;
-	//char recv_buf[9];
+	char recv_buf[MAX_BUF_LEN];
 	struct port_info info;
 
 	if ( argc != 2 ) {
@@ -40,7 +40,8 @@ main( int argc, char *argv[] )
 
 	/* 发送数据 */
 	for ( i = 0; i < 10; i++ ) {
-		len = send_data( port_fd, "Test Data", 9 );
+		fgets( recv_buf, MAX_BUF_LEN, stdin );
+		len = send_data( port_fd, recv_buf, strlen(recv_buf) + 1 );
 		if ( len > 0 ) {
 			fprintf( stdout, "%d send data successfully\n", i );
 		} else {

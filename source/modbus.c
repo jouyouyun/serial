@@ -34,8 +34,10 @@ int main( int argc, char *argv[] )
 		num >>= 8;
 		str[4] = num & 0xFF;
 		val = modbus_crc( str, 6 );
+		//printf( "%02X\t", val );
 		str[7] = val & 0xFF;
 		val >>= 8;
+		//printf( "%02X\n", val );
 		str[6] = val & 0xFF;
 
 		for ( i = 0; i < 8; ++i ) {
@@ -50,8 +52,12 @@ int main( int argc, char *argv[] )
 			recv[i] = (unsigned char) ( chartoint( recvtmp[i * 2] ) * 16 + 
 					chartoint( recvtmp[i * 2 + 1] ) );
 		}
+		for ( i = 0; i < len; ++i ) {
+			printf( "%d ", recv[i] );
+		}
 
 		val = modbus_crc( recv, len - 2 );
+		printf( "\n%02X\n", val );
 		if ( ( (val & 0xFF) != recv[len - 1] ) || ( ( (val >> 8) & 0xFF ) 
 				!= recv[len - 2] ) ) {
 			printf( "CRC ERROR\n" );
@@ -60,6 +66,7 @@ int main( int argc, char *argv[] )
 
 		k = 2;
 		num = recv[k] / 4;
+		printf( "num: %d\n", num );
 		++k;
 
 		for ( i = 0; i < num; ++i ) {

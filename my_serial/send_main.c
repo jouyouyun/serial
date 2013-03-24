@@ -41,7 +41,11 @@ main( int argc, char *argv[] )
 	/* 发送数据 */
 	for ( i = 0; i < 10; i++ ) {
 		fgets( recv_buf, MAX_BUF_LEN, stdin );
-		len = send_data( port_fd, recv_buf, strlen(recv_buf) + 1 );
+		if ( recv_buf[strlen(recv_buf) - 1] == '\n' ) {
+			recv_buf[strlen(recv_buf) - 1] = '\0';
+		}
+
+		len = write_data( port_fd, recv_buf, strlen(recv_buf) + 1 );
 		if ( len > 0 ) {
 			fprintf( stdout, "%d send data successfully\n", i );
 		} else {

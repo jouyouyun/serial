@@ -8,8 +8,7 @@
 #include "common.h"
 #include <unistd.h>    /* Unix 标准函数定义 */
 #include <fcntl.h>
-#include <termios.h>   /* POSIX 终端控制定义 */
-#include <mysql/mysql.h>
+#include <termios.h>   /* PPSIX 终端控制定义 */
 
 int port_fd;
 
@@ -42,17 +41,6 @@ void recv_msg(pport_info pinfo);
 /* 字符串与数字相互转换 */
 long int str_to_int( char *str );
 void str_delim( const char *str, const char *delim );
-//end
-
-/* db_switch */
-/* 数据库 */
-#define db_name "db_serial"
-char table_name[MAX_NAME_LEN];
-
-void init_mysql( MYSQL *pdata );
-void get_table_name();
-int get_cur_time( char *str_time, int type );
-void *db_switch_thread( void *arg );
 //end
 
 #endif

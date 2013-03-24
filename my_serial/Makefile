@@ -15,29 +15,22 @@ PWD = $(shell pwd)/
 
 #CFLAGS = -Wall -g -lpthread -I$(INCS)
 #LDFLAGS = -Wall -g -lpthread -I$(INCS)
-CFLAGS = -Wall -g
-LDFLAGS = -Wall -g
+CFLAGS  = -Wall -g -lpthread -lm
+LDFLAGS = -Wall -g -lpthread -lm
 
-OBJS := my_serial.o set_port.o
+OBJS := my_serial.o set_port.o parse.o
+OBJS_SEND := send_main.o
+OBJS_RECV := recv_main.o
 
 all : ${PROG_SEND} ${PROG_RECV}
 
-${PROG_SEND} : ${OBJS} send_main.o
+${PROG_SEND} : ${OBJS} ${OBJS_SEND}
 	${CC} ${CFLAGS} $^ -o $@
 
-${PROG_RECV} : ${OBJS} recv_main.o
+${PROG_RECV} : ${OBJS} ${OBJS_RECV}
 	${CC} ${CFLAGS} $^ -o $@
-	
-#$(COMMON)common.o:
-#	cd ${COMMON}; ${CC} ${LDFLAGS} -c common.c; cd ${PWD}
 	
 %.o : %.c
-	${CC} ${CFLAGS} -c $<
-
-send_main.o : send_main.c
-	${CC} ${CFLAGS} -c $<
-
-recv_main.o : recv_main.c
 	${CC} ${CFLAGS} -c $<
 	
 clean :

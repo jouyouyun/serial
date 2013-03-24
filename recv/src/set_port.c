@@ -22,7 +22,7 @@ int set_port( pport_info p_info )
 	cfmakeraw( &new_opt );
 	tcgetattr( p_info->port_fd, &old_opt );
 
-	/*============一下设置波特率=========*/
+	/*============设置波特率=========*/
 	baud_rate = get_baud_rate(p_info->baud_rate);
 
 	/* 修改 new_opt 结构体中的串口输入/输出波特率参数 */
@@ -59,9 +59,9 @@ int set_port( pport_info p_info )
 	/* 修改输出模式，原始数据输出 */
 	new_opt.c_oflag &= ~OPOST;
 	/* 修改控制字符，读取字符的个数最少为 1 */
-	new_opt.c_cc[VMIN] = 37;
+	new_opt.c_cc[VMIN] = 0;
 	/* 修改控制字符，读取第一个字符等待 1 * (1 / 10) s */
-	new_opt.c_cc[VTIME] = 5;
+	new_opt.c_cc[VTIME] = 1;
 
 	/* 如果发生数据溢出，接收数据，但不再读取 */
 	tcflush( p_info->port_fd, TCIFLUSH );

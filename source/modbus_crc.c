@@ -21,6 +21,7 @@ unsigned short modbus_crc( unsigned char *p, int len )
 	int i = 0;
 	int k = 0;
 
+	printf("\np: %s\nlen: %d\n", p, len);
 	for ( i = 0; i < len; ++i ) {
 		ret ^= p[i];
 		for ( k = 0; k < 8; ++k ) {
@@ -31,6 +32,7 @@ unsigned short modbus_crc( unsigned char *p, int len )
 
 	/* 将低 8 位与高 8 位相或 */
 	ret = ((ret & 0x00FF) << 8) | ((ret & 0xFF00) >> 8);
+	printf("ret: %d\t%0X\n", ret);
 	return ret;
 }
 

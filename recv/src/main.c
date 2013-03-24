@@ -3,10 +3,13 @@
  */
 
 #include "my_serial.h"
+#include "parse_data.h"
 
 int
 main( int argc, char *argv[] )
 {
+	int ret;
+	pthread_t thrd_sql;
 	struct port_info info;
 
 	if ( argc != 2 ) {
@@ -20,6 +23,13 @@ main( int argc, char *argv[] )
 		return -1;
 	}
 	atexit(close_port);
+
+	/*get_table_name();
+	ret = pthread_create(&thrd_sql, NULL, db_switch_thread, NULL);
+	if ( ret != 0 ) {
+		debug("create thrd_sql err!!\n");
+		return -1;
+	}*/
 
 	/* 设置串口参数 */
 	info.baud_rate = 38400;

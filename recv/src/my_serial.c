@@ -67,7 +67,7 @@ int read_data( int fd, char *data, int data_len )
 void recv_msg(pport_info pinfo)
 {
 	int i, j, ret;
-	int len = 0, cnt = 0;
+	int len = 0;
 	char buf[MAX_BUF_LEN];
 	pthread_t thrd;
 	
@@ -82,8 +82,8 @@ void recv_msg(pport_info pinfo)
 				j++;
 			}
 			
-			cnt++;
-			if ( cnt == 2 ) {
+			//cnt++;
+			if ( j > 20 ) {
 				fprintf(stdout, "recv: ");
 				for ( i = 0; i < j; i++ ) {
 					fprintf(stdout, "%0X ", recv[i] );
@@ -96,13 +96,14 @@ void recv_msg(pport_info pinfo)
 				debug("create thrd err: %s\n", strerror(errno) );
 				}
 				usleep(100);
+				pthread_detach(thrd);
 				memset(recv, 0, MAX_BUF_LEN);
 				j = 0;
-				cnt = 0;
+				//cnt = 0;
 			}
 		} else {
 			continue;
 		}
-		sleep(2);
+		sleep(1);
 	}
 }

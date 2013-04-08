@@ -15,23 +15,19 @@ class ReadPort : public QObject
     Q_OBJECT
 public:
     ReadPort();
-    ReadPort(QString serialPort, QString baud, QString parity, QString dataBit,
-            QString stopBit, QString flowControl);
-    ~ReadPort();
+    ReadPort( Posix_QextSerialPort *mycom );
     Posix_QextSerialPort *myPort;
     
 private:
     QTimer *readTimer;
 
-    BaudRateType getBaudRate(QString &baudRate);
-    DataBitsType getDataBit(QString &dataBit);
-    ParityType getParityType(QString &parityType);
-    StopBitsType getStopBit(QString &stopBit);
-    FlowType getFlowControl(QString &flowControl);
+signals:
+    void sendDatas(QString);
     
 public slots:
     void slot_read_com();               //监听并读取串口数据
     void slot_read_timer();
+    void slot_program_exit();
     
 };
 

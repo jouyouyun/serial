@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -19,8 +19,8 @@ SOURCES += main.cpp\
     readport.cpp
 
 HEADERS  += mainwindow.h \
-    qextserialbase.h \
     posix_qextserialport.h \
-    readport.h
+    readport.h \
+    qextserialbase.h
 
 FORMS    += mainwindow.ui
